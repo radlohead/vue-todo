@@ -1,26 +1,19 @@
 <template>
-  <div>Header</div>
+  <div>
+    Header
+    <input type="text" ref="todo">
+    <button v-on:click="addTodo">add</button>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    addTodo(text) {
+      const todoText = this.$refs.todo.value;
+      this.$emit("addTodo", todoText);
+      console.log("addTodo: ", todoText);
+    }
+  }
+};
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
