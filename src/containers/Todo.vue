@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header v-on:addTodo="addTodo"></Header>
-    <TodoList></TodoList>
+    <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
   </section>
 </template>
@@ -11,10 +11,6 @@ import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
 import Footer from "@/components/Footer.vue";
 
-const todo = {
-  list: []
-};
-
 export default {
   components: {
     Header,
@@ -23,9 +19,14 @@ export default {
   },
   methods: {
     addTodo(text) {
-      todo.list.push(text);
-      console.log("addTodo: ", text, todo.list);
+      this.todos.push(text);
+      console.log("addTodo: ", text, JSON.parse(JSON.stringify(this.todos)));
     }
+  },
+  data() {
+    return {
+      todos: []
+    };
   }
 };
 </script>
