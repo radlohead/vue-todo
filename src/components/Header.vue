@@ -9,8 +9,10 @@
 <script>
 export default {
   methods: {
-    addTodo(text) {
+    addTodo() {
       const todoText = this.$refs.todo.value;
+
+      if (!todoText) return;
       this.$emit("addTodo", todoText);
       this.$refs.todo.value = "";
       console.log("addTodo: ", todoText);
