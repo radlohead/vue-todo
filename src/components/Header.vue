@@ -12,6 +12,7 @@ export default {
     addTodo(text) {
       const todoText = this.$refs.todo.value;
       this.$emit("addTodo", todoText);
+      this.$refs.todo.value = "";
       console.log("addTodo: ", todoText);
     }
   }
