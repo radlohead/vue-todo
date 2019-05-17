@@ -19,8 +19,10 @@ export default {
   },
   methods: {
     addTodo(text) {
-      this.todos.push(text);
-      console.log("addTodo: ", text, JSON.parse(JSON.stringify(this.todos)));
+      this.todos.push({
+        text,
+        isActive: false
+      });
     }
   },
   data() {
