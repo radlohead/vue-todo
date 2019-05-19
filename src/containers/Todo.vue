@@ -3,6 +3,8 @@
     <h1>{{ this.$store.state.moduleA }}</h1>
     <span>customCount: {{ customCount }}</span>
     <span>getCount: {{ getCount }}</span>
+    <button @click="muCount">click</button>
+    <span>muCount: {{ todoC }}</span>
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
@@ -10,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 import store from "../store";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
@@ -24,6 +26,7 @@ export default {
     Footer
   },
   methods: {
+    ...mapMutations("moduleA", ["muCount"]),
     addTodo(text) {
       this.todos.push({
         text,
@@ -54,6 +57,9 @@ export default {
     ...mapGetters("moduleA", ["getCount"]),
     customCount() {
       return this.moduleA.count;
+    },
+    todoC() {
+      return this.$store.state.moduleA.count;
     }
   }
 };

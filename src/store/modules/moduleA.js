@@ -7,6 +7,11 @@ const moduleA = {
   },
   getters: {
     getCount: () => 2
+  },
+  mutations: {
+    muCount: state => {
+      return (state.count += 2)
+    }
   }
 }
 
