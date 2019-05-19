@@ -1,6 +1,7 @@
 <template>
   <section>
-    <h1>{{ this.$store.state }}</h1>
+    <h1>{{ this.$store.state.moduleA }}</h1>
+    <h2>{{ customCount }}</h2>
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
@@ -8,10 +9,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import store from "../store";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
 import Footer from "@/components/Footer.vue";
+import moduleA from "../store/modules/moduleA";
 
 export default {
   components: {
@@ -25,9 +28,6 @@ export default {
         text,
         isActive: false
       });
-    },
-    test() {
-      return store.state;
     }
   },
   data() {
@@ -37,7 +37,21 @@ export default {
     };
   },
   mounted() {
-    console.log("store state: ", JSON.parse(JSON.stringify(store.state)));
+    console.log(
+      "store state: ",
+      JSON.parse(JSON.stringify(store.state)),
+      this.customCount
+    );
+  },
+  computed: {
+    // ...mapState({
+    //   count: state => state.moduleA.count,
+    //   a: "moduleA"
+    // }),
+    ...mapState(["moduleA", "moduleB"]),
+    customCount() {
+      return `customCount: ${this.moduleA.count}`;
+    }
   }
 };
 </script>

@@ -1,20 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import moduleA from './modules/moduleA'
+import moduleB from './modules/moduleB'
 
 Vue.use(Vuex)
-
-const moduleA = {
-  namespaced: true,
-  state: {
-    test: 'A test'
-  }
-}
-
-const moduleB = {
-  state: {
-    test: 'A test'
-  }
-}
 
 const store = new Vuex.Store({
   modules: {
