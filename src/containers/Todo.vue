@@ -1,7 +1,8 @@
 <template>
   <section>
     <h1>{{ this.$store.state.moduleA }}</h1>
-    <h2>{{ customCount }}</h2>
+    <span>customCount: {{ customCount }}</span>
+    <span>getCount: {{ getCount }}</span>
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import store from "../store";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
@@ -40,7 +41,8 @@ export default {
     console.log(
       "store state: ",
       JSON.parse(JSON.stringify(store.state)),
-      this.customCount
+      this.customCount,
+      this.getCount
     );
   },
   computed: {
@@ -49,8 +51,9 @@ export default {
     //   a: "moduleA"
     // }),
     ...mapState(["moduleA", "moduleB"]),
+    ...mapGetters("moduleA", ["getCount"]),
     customCount() {
-      return `customCount: ${this.moduleA.count}`;
+      return this.moduleA.count;
     }
   }
 };

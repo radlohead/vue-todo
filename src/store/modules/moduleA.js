@@ -4,6 +4,9 @@ const moduleA = {
     test: 'A test',
     moa: 'moa!!!',
     count: 1
+  },
+  getters: {
+    getCount: () => 2
   }
 }
 
