@@ -5,6 +5,7 @@
     <span>getCount: {{ getCount }}</span>
     <button @click="muCount">click</button>
     <span>muCount: {{ todoC }}</span>
+    <input type="text" v-model="todoC">
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
