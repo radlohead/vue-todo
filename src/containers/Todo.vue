@@ -6,6 +6,11 @@
     <button @click="muCount">click</button>
     <span>muCount: {{ todoC }}</span>
     <input type="text" v-model="todoC">
+    <button @click="countAsync">countAsync click</button>
+    <button @click="count2Async(10)">count2Async click</button>
+    <button @click="testCount2">testCount2 click</button>
+    <button @click="count3Async">count3Async click</button>
+    <div>muTitle: {{ title }}</div>
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
@@ -13,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapState, mapGetters, mapMutations } from "vuex";
 import store from "../store";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
@@ -27,11 +32,20 @@ export default {
     Footer
   },
   methods: {
-    ...mapMutations("moduleA", ["muCount"]),
+    ...mapMutations("moduleA", ["muCount", "muTitle"]),
+    ...mapActions("moduleA", ["countAsync", "count2Async", "count3Async"]),
     addTodo(text) {
       this.todos.push({
         text,
         isActive: false
+      });
+    },
+    testMethod() {
+      return "adfadfafadfadfa";
+    },
+    testCount2() {
+      this.$store.dispatch("moduleA/countAsync").then(res => {
+        console.log("testCount2", res);
       });
     }
   },
@@ -61,6 +75,9 @@ export default {
     },
     todoC() {
       return this.$store.state.moduleA.count;
+    },
+    title() {
+      return this.$store.state.moduleA.title;
     }
   }
 };
