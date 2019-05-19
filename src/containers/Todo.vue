@@ -1,5 +1,6 @@
 <template>
   <section>
+    <h1>{{ this.$store.state }}</h1>
     <Header v-on:addTodo="addTodo"></Header>
     <TodoList v-bind:todos="todos"></TodoList>
     <Footer></Footer>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import store from "../store";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
 import Footer from "@/components/Footer.vue";
@@ -23,12 +25,19 @@ export default {
         text,
         isActive: false
       });
+    },
+    test() {
+      return store.state;
     }
   },
   data() {
     return {
-      todos: []
+      todos: [],
+      test2: store.state
     };
+  },
+  mounted() {
+    console.log("store state: ", JSON.parse(JSON.stringify(store.state)));
   }
 };
 </script>

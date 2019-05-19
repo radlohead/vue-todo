@@ -15,7 +15,6 @@ export default {
       if (!todoText) return;
       this.$emit("addTodo", todoText);
       this.$refs.todo.value = "";
-      console.log("addTodo: ", todoText);
     }
   }
 };
